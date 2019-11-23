@@ -3,7 +3,7 @@ package com.epam.implPyramid;
 import com.epam.entity.Point;
 import com.epam.interfacePyramid.PointValidator;
 
-public final class AreaLimiter implements PointValidator {
+public class AreaLimiter implements PointValidator {
 
     private final static int DEFAULT_MIN_X = -100;
     private final static int DEFAULT_MAX_X = 100;

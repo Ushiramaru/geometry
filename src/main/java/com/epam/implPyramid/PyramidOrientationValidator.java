@@ -6,11 +6,11 @@ import com.epam.entity.Triangle;
 import com.epam.interfacePyramid.PyramidValidator;
 import com.epam.interfacePyramid.TriangleValidator;
 
-public final class PyramidOrintationValidator implements PyramidValidator {
+public class PyramidOrientationValidator implements PyramidValidator {
 
     private TriangleValidator baseValidator;
 
-    public PyramidOrintationValidator(TriangleValidator baseValidator) {
+    public PyramidOrientationValidator(TriangleValidator baseValidator) {
         this.baseValidator = baseValidator;
     }
 

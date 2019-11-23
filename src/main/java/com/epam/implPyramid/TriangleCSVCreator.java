@@ -36,7 +36,7 @@ public final class TriangleCSVCreator implements TriangleCreator {
 
         Optional<Triangle> optionalTriangle;
         if (points.size() == POINTS_COUNT) {
-            optionalTriangle = Optional.of(new Triangle((Point[]) points.toArray()));
+            optionalTriangle = Optional.of(new Triangle(points.toArray(new Point[0])));
         } else {
             optionalTriangle = Optional.empty();
         }

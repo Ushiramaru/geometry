@@ -23,12 +23,15 @@ public final class PyramidCSVCreator implements PyramidCreator {
 
     @Override
     public Optional<Pyramid> create(String line) {
-        String topLine = line.substring(0, line.indexOf(DELIMITER));
+        int delimiterIndex = line.indexOf(DELIMITER);
+        delimiterIndex = line.indexOf(DELIMITER, delimiterIndex + 1);
+        delimiterIndex = line.indexOf(DELIMITER, delimiterIndex + 1);
+        String topLine = line.substring(0, delimiterIndex);
         String[] topCoordinates = topLine.split(DELIMITER);
         Point top = new Point(Integer.valueOf(topCoordinates[0]), Integer.valueOf(topCoordinates[1]), Integer.valueOf(topCoordinates[2]));
         Optional<Pyramid> optionalPyramid;
         if (pointValidator.isValid(top)) {
-            Optional<Triangle> optionalTriangle = triangleCreator.create(line.substring(line.indexOf(DELIMITER) + 1));
+            Optional<Triangle> optionalTriangle = triangleCreator.create(line.substring(delimiterIndex + 1));
             if (optionalTriangle.isPresent()) {
                 optionalPyramid = Optional.of(new Pyramid(top, optionalTriangle.get()));
             } else {

@@ -3,7 +3,7 @@ package com.epam.implPyramid;
 import com.epam.entity.Triangle;
 import com.epam.interfacePyramid.TriangleValidator;
 
-public final class TriangleOrintationValidator implements TriangleValidator {
+public class TriangleOrientationValidator implements TriangleValidator {
 
     @Override
     public boolean isValid(Triangle triangle) {

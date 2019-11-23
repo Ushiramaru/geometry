@@ -2,7 +2,7 @@ package com.epam.implPyramid;
 
 import com.epam.interfacePyramid.PyramidLineValidator;
 
-public final class PyramidCSVLineValidator implements PyramidLineValidator {
+public class PyramidCSVLineValidator implements PyramidLineValidator {
 
     private final static String regex = "(-?(\\d)+;){12}";
 

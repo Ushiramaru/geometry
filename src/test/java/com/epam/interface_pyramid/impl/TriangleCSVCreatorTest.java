@@ -1,12 +1,8 @@
-package com.epam.implPyramid;
+package com.epam.interface_pyramid.impl;
 
-import com.epam.interfacePyramid.TriangleCreator;
+import com.epam.interface_pyramid.TriangleCreator;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class TriangleCSVCreatorTest {
 
@@ -15,12 +11,12 @@ public class TriangleCSVCreatorTest {
     private final static String FALSE_TRIANGLE_LINE = "-1;222;3;1;42;3;-1;2;0;";
 
     @Test
-    public void createShouldEmptyOptional() {
+    public void createTestShouldEmptyOptional() {
         Assert.assertFalse(creator.create(FALSE_TRIANGLE_LINE).isPresent());
     }
 
     @Test
-    public void createShouldNotEmptyOptional() {
+    public void createTestShouldNotEmptyOptional() {
         Assert.assertTrue(creator.create(TRUE_TRIANGLE_LINE).isPresent());
     }
 

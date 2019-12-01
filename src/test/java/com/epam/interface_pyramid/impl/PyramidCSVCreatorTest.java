@@ -1,7 +1,7 @@
-package com.epam.implPyramid;
+package com.epam.interface_pyramid.impl;
 
-import com.epam.interfacePyramid.PointValidator;
-import com.epam.interfacePyramid.PyramidCreator;
+import com.epam.interface_pyramid.PointValidator;
+import com.epam.interface_pyramid.PyramidCreator;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -19,12 +19,12 @@ public class PyramidCSVCreatorTest {
     }
 
     @Test
-    public void createShouldEmptyOptional() {
+    public void createTestShouldEmptyOptional() {
         Assert.assertFalse(creator.create(FALSE_TRIANGLE_LINE).isPresent());
     }
 
     @Test
-    public void createShouldNotEmptyOptional() {
+    public void createTestShouldNotEmptyOptional() {
         Assert.assertTrue(creator.create(TRUE_TRIANGLE_LINE).isPresent());
     }
 

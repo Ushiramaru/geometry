@@ -1,16 +1,20 @@
-package com.epam.implPyramid;
+package com.epam.interface_pyramid.impl;
 
 import com.epam.entity.Pyramid;
-import com.epam.interfacePyramid.*;
+import com.epam.interface_pyramid.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
+
+import org.apache.log4j.Logger;
 
 public final class Director implements PyramidExtractor {
 
-    private static final Logger LOGGER = Logger.getLogger(String.valueOf(Director.class));
+    private static final Logger LOGGER = Logger.getLogger(Director.class);
+    private static final String LOGGER_MESSAGE_START = "Start extract";
+    private static final String LOGGER_MESSAGE_FIND = "Find satisfying object";
+    private static final String LOGGER_MESSAGE_END = "End extract";
 
     private FileLineReader fileLineReader;
     private PyramidLineValidator pyramidLineValidator;
@@ -27,7 +31,7 @@ public final class Director implements PyramidExtractor {
 
     @Override
     public List<Pyramid> extract(String path) {
-        LOGGER.info("Start extract");
+        LOGGER.info(LOGGER_MESSAGE_START);
         List<String> lines = fileLineReader.readLines(path);
         List<Optional<Pyramid>> optionalsPyramid = new ArrayList<>();
         for (String line : lines) {
@@ -40,12 +44,12 @@ public final class Director implements PyramidExtractor {
         for (Optional<Pyramid> optionalPyramid : optionalsPyramid) {
             if (optionalPyramid.isPresent()) {
                 if (pyramidValidator.isValid(optionalPyramid.get())) {
-                    LOGGER.info("Find satisfying object");
+                    LOGGER.info(LOGGER_MESSAGE_FIND);
                     pyramids.add(optionalPyramid.get());
                 }
             }
         }
-        LOGGER.info("End extract");
+        LOGGER.info(LOGGER_MESSAGE_END);
 
         return pyramids;
     }

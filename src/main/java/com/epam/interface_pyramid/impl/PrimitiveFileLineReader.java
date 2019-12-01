@@ -1,6 +1,6 @@
-package com.epam.implPyramid;
+package com.epam.interface_pyramid.impl;
 
-import com.epam.interfacePyramid.FileLineReader;
+import com.epam.interface_pyramid.FileLineReader;
 
 import java.io.*;
 import java.util.ArrayList;

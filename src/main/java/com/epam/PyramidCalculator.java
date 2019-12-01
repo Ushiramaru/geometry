@@ -12,30 +12,34 @@ public class PyramidCalculator {
     public double surfaceArea(Pyramid pyramid) {
         List<Triangle> facets = new ArrayList<>();
         Triangle base = pyramid.getBase();
-        facets.add(new Triangle(pyramid.getTop(), base.getPoint1(), base.getPoint2()));
-        facets.add(new Triangle(pyramid.getTop(), base.getPoint2(), base.getPoint3()));
-        facets.add(new Triangle(pyramid.getTop(), base.getPoint3(), base.getPoint1()));
+        facets.add(new Triangle(pyramid.getTop(), base.getPointFirst(), base.getPointSecond()));
+        facets.add(new Triangle(pyramid.getTop(), base.getPointSecond(), base.getPointThird()));
+        facets.add(new Triangle(pyramid.getTop(), base.getPointThird(), base.getPointFirst()));
         facets.add(base);
         double result = 0;
         for (Triangle facet : facets) {
             result += triangleArea(facet);
         }
+
         return result;
     }
 
-    public double volume(Pyramid pyramid) throws CalculatorException {
+    public double volume(Pyramid pyramid) {
         Triangle base = pyramid.getBase();
-        int h;
-        if (base.getPoint1().getX() == base.getPoint2().getX() && base.getPoint1().getX() == base.getPoint3().getX()) {
-            h = Math.abs(base.getPoint1().getX() - pyramid.getTop().getX());
+        Point basePointFirst = base.getPointFirst();
+        Point basePointSecond = base.getPointSecond();
+        Point basePointThird = base.getPointThird();
+        Point pyramidTop = pyramid.getTop();
+
+        int h = 0;
+        if (basePointFirst.getX() == basePointSecond.getX() && basePointFirst.getX() == basePointThird.getX()) {
+            h = Math.abs(basePointFirst.getX() - pyramidTop.getX());
         } else {
-            if (base.getPoint1().getY() == base.getPoint2().getY() && base.getPoint1().getY() == base.getPoint3().getY()) {
-                h = Math.abs(base.getPoint1().getY() - pyramid.getTop().getY());
+            if (basePointFirst.getY() == basePointSecond.getY() && basePointFirst.getY() == basePointThird.getY()) {
+                h = Math.abs(basePointFirst.getY() - pyramidTop.getY());
             } else {
-                if (base.getPoint1().getZ() == base.getPoint2().getZ() && base.getPoint1().getZ() == base.getPoint3().getZ()) {
-                    h = Math.abs(base.getPoint1().getZ() - pyramid.getTop().getZ());
-                } else {
-                    throw new CalculatorException("Invalid pyramid");
+                if (basePointFirst.getZ() == basePointSecond.getZ() && basePointFirst.getZ() == basePointThird.getZ()) {
+                    h = Math.abs(basePointFirst.getZ() - pyramidTop.getZ());
                 }
             }
         }
@@ -49,22 +53,37 @@ public class PyramidCalculator {
 
     public boolean isBaseBelongsCoordinatePlane(Pyramid pyramid) {
         Triangle base = pyramid.getBase();
-        return base.getPoint1().getX() == 0 && base.getPoint2().getX() == 0 && base.getPoint3().getX() == 0 ||
-                base.getPoint1().getY() == 0 && base.getPoint2().getY() == 0 && base.getPoint3().getY() == 0 ||
-                base.getPoint1().getZ() == 0 && base.getPoint2().getZ() == 0 && base.getPoint3().getZ() == 0;
+        Point basePointFirst = base.getPointFirst();
+        Point basePointSecond = base.getPointSecond();
+        Point basePointThird = base.getPointThird();
+
+        return basePointFirst.getX() == 0 && basePointSecond.getX() == 0 && basePointThird.getX() == 0 ||
+                basePointFirst.getY() == 0 && basePointSecond.getY() == 0 && basePointThird.getY() == 0 ||
+                basePointFirst.getZ() == 0 && basePointSecond.getZ() == 0 && basePointThird.getZ() == 0;
     }
 
     private double triangleArea(Triangle triangle) {
-        Point point = new Point(triangle.getPoint2().getX() - triangle.getPoint1().getX(),
-                triangle.getPoint2().getY() - triangle.getPoint1().getY(),
-                triangle.getPoint2().getZ() - triangle.getPoint1().getZ());
-        Point point1 = new Point(triangle.getPoint3().getX() - triangle.getPoint1().getX(),
-                triangle.getPoint3().getY() - triangle.getPoint1().getY(),
-                triangle.getPoint3().getZ() - triangle.getPoint1().getZ());
-        Point point2 = new Point(point.getY() * point1.getZ() - point.getZ() * point1.getY(),
-                point.getX() * point1.getZ() - point.getZ() * point1.getX(),
-                point.getX() * point1.getY() - point.getY() * point1.getX());
-        return 0.5 * Math.sqrt(Math.pow(point2.getX(), 2) + Math.pow(point2.getY(), 2) + Math.pow(point2.getZ(), 2));
+        Point pointFirst = triangle.getPointFirst();
+        Point pointSecond = triangle.getPointSecond();
+        Point pointThird = triangle.getPointThird();
+
+        Point pointInterimFirst = new Point(pointSecond.getX() - pointFirst.getX(),
+                pointSecond.getY() - pointFirst.getY(),
+                pointSecond.getZ() - pointFirst.getZ());
+        Point pointInterimSecond = new Point(pointThird.getX() - pointFirst.getX(),
+                pointThird.getY() - pointFirst.getY(),
+                pointThird.getZ() - pointFirst.getZ());
+        Point pointInterimThird = new Point(
+                pointInterimFirst.getY() * pointInterimSecond.getZ() -
+                        pointInterimFirst.getZ() * pointInterimSecond.getY(),
+                pointInterimFirst.getX() * pointInterimSecond.getZ() -
+                        pointInterimFirst.getZ() * pointInterimSecond.getX(),
+                pointInterimFirst.getX() * pointInterimSecond.getY() -
+                        pointInterimFirst.getY() * pointInterimSecond.getX());
+
+        return 0.5 * Math.sqrt(Math.pow(pointInterimThird.getX(), 2) +
+                Math.pow(pointInterimThird.getY(), 2) +
+                Math.pow(pointInterimThird.getZ(), 2));
     }
 
 }

@@ -1,4 +1,4 @@
-package com.epam.interfacePyramid;
+package com.epam.interface_pyramid;
 
 import java.util.List;
 

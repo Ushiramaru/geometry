@@ -1,4 +1,4 @@
-package com.epam.interfacePyramid;
+package com.epam.interface_pyramid;
 
 public interface PyramidLineValidator {
 

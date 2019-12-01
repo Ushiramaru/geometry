@@ -1,7 +1,7 @@
-package com.epam.implPyramid;
+package com.epam.interface_pyramid.impl;
 
 import com.epam.entity.Point;
-import com.epam.interfacePyramid.PointValidator;
+import com.epam.interface_pyramid.PointValidator;
 
 public class AreaLimiter implements PointValidator {
 

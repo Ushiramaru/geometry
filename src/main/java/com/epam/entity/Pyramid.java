@@ -18,10 +18,22 @@ public class Pyramid {
         return base;
     }
 
+    public void setTop(Point top) {
+        this.top = top;
+    }
+
+    public void setBase(Triangle base) {
+        this.base = base;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Pyramid pyramid = (Pyramid) o;
         return top.equals(pyramid.top) &&
                 base.equals(pyramid.base);
